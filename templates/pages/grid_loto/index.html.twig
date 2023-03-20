@@ -26,9 +26,7 @@
     <div id="errors-grid-loto">
         {{ form_errors(form.ballsSelectionLoto) }}
         {{ form_errors(form.luckyNumberSelection) }}
-        {% if errors is defined %}
-            {{ errors }}
-        {% endif %}
+        {{ form_errors(form) }}
     </div>
     {{ form_end(form) }}
 {% endblock %}

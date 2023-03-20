@@ -12,7 +12,7 @@ class SelectionLoto
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'simple_array')]
     #[Assert\Count(
@@ -30,7 +30,7 @@ class SelectionLoto
             value: 49,
         )
     ])]
-    private array $ballsSelectionLoto;
+    private ?array $ballsSelectionLoto;
 
     #[ORM\Column(type: 'simple_array')]
     #[Assert\Count(

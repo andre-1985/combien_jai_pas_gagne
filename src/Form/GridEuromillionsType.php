@@ -18,11 +18,13 @@ class GridEuromillionsType extends AbstractType
                 'choices' => array_combine(range(1, 50), range(1, 50)),
                 'expanded' => true,
                 'multiple' => true,
+                'autocomplete' => true,
             ])
             ->add('starsSelection', ChoiceType::class, [
                 'choices' => array_combine(range(1, 12), range(1, 12)),
                 'expanded' => true,
                 'multiple' => true,
+                'autocomplete' => true,
             ])
             ->add('validate', SubmitType::class)
         ;

@@ -18,11 +18,13 @@ class GridLotoType extends AbstractType
                 'choices' => array_combine(range(1, 49), range(1, 49)),
                 'multiple' => true,
                 'expanded' => true,
+                'autocomplete' => true,
             ])
             ->add('luckyNumberSelection', ChoiceType::class, [
                 'choices' => array_combine(range(1, 10), range(1, 10)),
                 'multiple' => true,
                 'expanded' => true,
+                'autocomplete' => true,
             ])
             ->add('validate', SubmitType::class)
         ;

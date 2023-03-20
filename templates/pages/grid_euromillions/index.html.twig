@@ -3,30 +3,9 @@
 {% block title %}CJPG? - Grille Euromillions{% endblock %}
 
 {% block body %}
-    {{ form_start(form, { 'attr': { 'id': 'user-grid_euromillions-form' } }) }}
-    <div id="balls-grid">
-        {% for chkBall in form.ballsSelectionEuromillions %}
-            <div class="ball-euromillions">
-                {{ form_widget(chkBall, { 'attr': { 'class': 'checkbox-ball-euromillions',  } }) }}
-                {{ form_label(chkBall, null, { 'label_attr': { 'class': 'label-ball-euromillions' } }) }}
-            </div>
-        {% endfor %}
+    <div class="container-column">
+        {{ component('grid_euromillions', {
+            form: form,
+        }) }}
     </div>
-    <div id="stars-grid">
-        {% for chkStar in form.starsSelection %}
-            <div class="star-euromillions">
-                {{ form_widget(chkStar, { 'attr': { 'class': 'checkbox-star-euromillions' } }) }}
-                {{ form_label(chkStar, null, { 'label_attr': { 'class': 'label-star-euromillions' } }) }}
-            </div>
-        {% endfor %}
-    </div>
-    <div id="validate-grid-euromillions">
-        {{ form_widget(form.validate, { 'attr': { 'class': 'validate-btn-euromillions' } }) }}
-    </div>
-    <div id="errors-grid-euromillions">
-        {{ form_errors(form.ballsSelectionEuromillions) }}
-        {{ form_errors(form.starsSelection) }}
-        {{ form_errors(form) }}
-    </div>
-    {{ form_end(form) }}
 {% endblock %}

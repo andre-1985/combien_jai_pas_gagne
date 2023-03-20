@@ -1,0 +1,28 @@
+<div{{ attributes }}>
+    {{ form_start(form, { 'attr': { 'id': 'user-grid_loto-form' } }) }}
+    <div id="balls-grid">
+        {% for chkBall in form.ballsSelectionLoto %}
+            <div class="ball-loto">
+                {{ form_widget(chkBall, { 'attr': { 'class': 'checkbox-ball-loto' } }) }}
+                {{ form_label(chkBall, null, { 'label_attr': { 'class': 'label-ball-loto' }}) }}
+            </div>
+        {% endfor %}
+    </div>
+    <div id="luckynums-grid">
+        {% for chkLuckynum in form.luckyNumberSelection %}
+            <div class="luckynum-loto">
+                {{ form_widget(chkLuckynum, { 'attr': { 'class': 'checkbox-luckynum-loto' } }) }}
+                {{ form_label(chkLuckynum, null, { 'label_attr': { 'class': 'label-lucky-number' }}) }}
+            </div>
+        {% endfor %}
+    </div>
+    <div id="validate-grid-loto">
+        {{ form_widget(form.validate, { 'attr': { 'class': 'validate-btn-loto' } }) }}
+    </div>
+    <div id="errors-grid-loto">
+        {{ form_errors(form.ballsSelectionLoto) }}
+        {{ form_errors(form.luckyNumberSelection) }}
+        {{ form_errors(form) }}
+    </div>
+    {{ form_end(form) }}
+</div>

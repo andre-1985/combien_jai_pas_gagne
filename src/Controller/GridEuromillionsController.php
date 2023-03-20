@@ -27,6 +27,7 @@ class GridEuromillionsController extends AbstractController
                 ]
             );
         }
+
         return $this->render('pages/grid_euromillions/index.html.twig', [
             'form' => $form,
             'selectionEuromillions' => $selectionEuromillions,

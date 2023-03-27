@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CJPG? - Tirages Euromillions{% endblock %}
+
+{% block body %}
+    <div>
+        <table>
+            <tr>
+                {# sorting of properties based on query components #}
+                <th>{{ knp_pagination_sortable(allDrawsEuromillions, 'Tirage n°', 'a.id') }}</th>
+                <th{% if allDrawsEuromillions.isSorted('a.drawDay') %} class="sorted"{% endif %}>
+                    {{ knp_pagination_sortable(allDrawsEuromillions, 'Jour', 'a.drawDay') }}
+                </th>
+                <th{% if allDrawsEuromillions.isSorted(['a.drawDate']) %} class="sorted"{% endif %}>
+                    {{ knp_pagination_sortable(allDrawsEuromillions, 'Date de tirage', ['a.drawDate']) }}
+                </th>
+                <th{% if allDrawsEuromillions.isSorted(['a.ascendingWinningBalls']) %} class="sorted"{% endif %}>
+                    {{ knp_pagination_sortable(allDrawsEuromillions, 'Boules dans l\'ordre de tirage', ['a.ascendingWinningBalls']) }}
+                </th>
+                <th{% if allDrawsEuromillions.isSorted(['a.ascendingWinningStars']) %} class="sorted"{% endif %}>
+                    {{ knp_pagination_sortable(allDrawsEuromillions, 'Etoiles dans l\'ordre de tirage', ['a.ascendingWinningStars']) }}
+                </th>
+            </tr>
+
+            {# table body #}
+            {% for article in allDrawsEuromillions %}
+                <tr {% if loop.index is odd %}class="color"{% endif %}>
+                    <td>{{ article.id }}</td>
+                    <td>{{ article.drawDay }}</td>
+                    <td>{{ article.drawDate | date('d/m/Y') }}</td>
+                    <td>{{ article.ascendingWinningBalls }}</td>
+                    <td>{{ article.ascendingWinningStars }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <div class="count">
+            <p> Total: {{ allDrawsEuromillions.getTotalItemCount }} tirages.</p>
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(allDrawsEuromillions) }}
+        </div>
+    </div>
+{% endblock %}

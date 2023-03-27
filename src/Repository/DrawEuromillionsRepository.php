@@ -39,6 +39,74 @@ class DrawEuromillionsRepository extends ServiceEntityRepository
         }
     }
 
+    public function findDrawsByUserSelection(array $userSelection1, array $userSelection2)
+    {
+        $query = $this->createQueryBuilder('u')
+            ->setParameters(
+                array(
+                    'userSelection1'=>$userSelection1,
+                    'userSelection2'=>$userSelection2,
+                )
+            )
+            ->where('u.ball1 IN (:userSelection1)')
+            ->orWhere('u.ball2 IN (:userSelection1)')
+            ->orWhere('u.ball3 IN (:userSelection1)')
+            ->orWhere('u.ball4 IN (:userSelection1)')
+            ->orWhere('u.ball5 IN (:userSelection1)')
+            ->orWhere('u.star1 IN (:userSelection2)')
+            ->orWhere('u.star2 IN (:userSelection2)')
+            ->getQuery()
+        ;
+
+        return $query->getResult();
+    }
+
+    public function findDrawsByUserBallsSelection(array $userSelection)
+    {
+        $query = $this->createQueryBuilder('u')
+            ->setParameters(
+                array(
+                    'userSelection'=>$userSelection
+                )
+            )
+            ->where('u.ball1 IN (:userSelection)')
+            ->orWhere('u.ball2 IN (:userSelection)')
+            ->orWhere('u.ball3 IN (:userSelection)')
+            ->orWhere('u.ball4 IN (:userSelection)')
+            ->orWhere('u.ball5 IN (:userSelection)')
+            ->getQuery()
+        ;
+
+        return $query->getResult();
+    }
+
+    public function findDrawsByUserStarsSelection(array $userSelection)
+    {
+        $query = $this->createQueryBuilder('u')
+            ->setParameters(
+                array(
+                    'userSelection'=>$userSelection
+                )
+            )
+            ->where('u.star1 IN (:userSelection)')
+            ->orWhere('u.star2 IN (:userSelection)')
+            ->getQuery()
+        ;
+
+        return $query->getResult();
+    }
+
+    public function findByQuery($query): array
+    {
+        return $this->createQueryBuilder('de')
+            ->andWhere('de.drawDate LIKE :query')
+            ->setParameter('query', $query)
+            ->orderBy('de.drawDate', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 //    /**
 //     * @return DrawEuromillions[] Returns an array of DrawEuromillions objects
 //     */

@@ -2,10 +2,9 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\DrawEuromillionsRepository;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\Date;
 
 #[ORM\Entity(repositoryClass: DrawEuromillionsRepository::class)]
 class DrawEuromillions
@@ -16,17 +15,13 @@ class DrawEuromillions
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Assert\NotNull]
-    private ?int $yearDrawNumber;
-
-    #[ORM\Column]
     #[Assert\NotBlank]
     #[Assert\Length(min: 5, max: 8)]
     private ?string $drawDay;
 
     #[ORM\Column]
     #[Assert\NotNull]
-    private ?date $drawDate;
+    private ?string $drawDate;
 
     #[ORM\Column]
     #[Assert\NotNull]
@@ -249,18 +244,6 @@ class DrawEuromillions
         return $this->id;
     }
 
-    public function getYearDrawNumber(): ?int
-    {
-        return $this->yearDrawNumber;
-    }
-
-    public function setYearDrawNumber(int $yearDrawNumber): self
-    {
-        $this->yearDrawNumber = $yearDrawNumber;
-
-        return $this;
-    }
-
     public function getDrawDay(): ?string
     {
         return $this->drawDay;
@@ -273,12 +256,12 @@ class DrawEuromillions
         return $this;
     }
 
-    public function getDrawDate(): ?date
+    public function getDrawDate(): ?string
     {
         return $this->drawDate;
     }
 
-    public function setDrawDate(date $drawDate): self
+    public function setDrawDate(string $drawDate): self
     {
         $this->drawDate = $drawDate;
 

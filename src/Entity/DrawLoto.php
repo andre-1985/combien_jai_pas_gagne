@@ -16,17 +16,13 @@ class DrawLoto
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Assert\NotNull]
-    private ?int $yearDrawNumber;
-
-    #[ORM\Column]
     #[Assert\NotBlank]
     #[Assert\Length(min: 5, max: 8)]
     private ?string $drawDay;
 
     #[ORM\Column]
     #[Assert\NotNull]
-    private ?date $drawDate;
+    private Date $drawDate;
 
     #[ORM\Column]
     #[Assert\NotNull]
@@ -216,18 +212,6 @@ class DrawLoto
         return $this->id;
     }
 
-    public function getYearDrawNumber(): ?int
-    {
-        return $this->yearDrawNumber;
-    }
-
-    public function setYearDrawNumber(int $yearDrawNumber): self
-    {
-        $this->yearDrawNumber = $yearDrawNumber;
-
-        return $this;
-    }
-
     public function getDrawDay(): ?string
     {
         return $this->drawDay;
@@ -240,12 +224,12 @@ class DrawLoto
         return $this;
     }
 
-    public function getDrawDate(): ?date
+    public function getDrawDate(): Date
     {
         return $this->drawDate;
     }
 
-    public function setDrawDate(date $drawDate): self
+    public function setDrawDate(Date $drawDate): self
     {
         $this->drawDate = $drawDate;
 

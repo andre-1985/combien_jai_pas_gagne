@@ -30,7 +30,7 @@ class SelectionEuromillions
             value: 50,
         )
     ])]
-    private ?array $ballsSelectionEuromillions;
+    public ?array $ballsSelectionEuromillions;
 
     #[ORM\Column(type: 'simple_array')]
     #[Assert\Count(
@@ -48,7 +48,7 @@ class SelectionEuromillions
             value: 12,
         )
     ])]
-    private ?array $starsSelection;
+    public ?array $starsSelection;
 
     #[Assert\IsTrue(message: 'Vous devez sélectionner au moins 2 numéros !')]
     public function isValid(): bool

@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\SelectionEuromillions;
 use App\Form\GridEuromillionsType;
 use App\Repository\DrawEuromillionsRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,57 +15,69 @@ use Symfony\Component\Routing\Annotation\Route;
 class GridEuromillionsController extends AbstractController
 {
     #[Route('/grilleEuromillions', name: 'grid_euromillions')]
-    public function index(Request $request, DrawEuromillionsRepository $repository): Response
+    public function index(Request $request, PaginatorInterface $paginator, DrawEuromillionsRepository $repository): Response
     {
         $selectionEuromillions = new SelectionEuromillions();
 
         $form = $this->createForm(GridEuromillionsType::class, $selectionEuromillions)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $userSelectionRequest = $repository->findDrawsByUserSelection($data->ballsSelectionEuromillions, $data->starsSelection);
+            $userSelection = $form->getData();
+            $userSelectionRequest = $repository->findDrawsByUserSelection($userSelection->ballsSelectionEuromillions, $userSelection->starsSelection);
+            $userSelectionResults = [];
 
-            /*if (!empty($data->ballsSelectionEuromillions) && !empty($data->starsSelection)) {
-                $tutu = 'toto + titi: Ok';
+            foreach ($userSelectionRequest as $userSelectionRq) {
+                $userResultsDrawId = 'draw_' . $userSelectionRq->getId();
+                $drawId = $userResultsDrawId;
 
-                return $this->render(
-                    'pages/grid_euromillions/user_euromillions_results.html.twig', [
-                        'tutu' => $tutu,
-                    ]
-                );
+                $ballsRq = $userSelectionRq->getBallsArray();
+                $starsRq = $userSelectionRq->getStarsArray();
+
+                $userCommonBallsArray = array_intersect($userSelection->ballsSelectionEuromillions, $ballsRq);
+                $userCommonStarsArray = array_intersect($userSelection->starsSelection, $starsRq);
+
+                if (!empty($userCommonBallsArray) && !empty($userCommonStarsArray)) {
+                    $userResultsDrawId = [
+                        'userCommonBallsArray' => $userCommonBallsArray,
+                        'userCommonStarsArray' => $userCommonStarsArray,
+                        'completeDraw' => $userSelectionRq
+                    ];
+                    $countCommonBallsArray = count($userResultsDrawId['userCommonBallsArray']);
+                    $countCommonStarsArray = count($userResultsDrawId['userCommonStarsArray']);
+                    $categoryName = 'balls_' . $countCommonBallsArray . '_' . $countCommonStarsArray;
+
+                } elseif (empty($userCommonBallsArray) && !empty($userCommonStarsArray)) {
+                    $userResultsDrawId = [
+                        'userCommonStarsArray' => $userCommonStarsArray,
+                        'completeDraw' => $userSelectionRq
+                    ];
+                    $countCommonStarsArray = count($userResultsDrawId['userCommonStarsArray']);
+                    $categoryName = '_stars_' . $countCommonStarsArray;
+
+                } else {
+                    $userResultsDrawId = [
+                        'userCommonBallsArray' => $userCommonBallsArray,
+                        'completeDraw' => $userSelectionRq
+                    ];
+                    $countCommonBallsArray = count($userResultsDrawId['userCommonBallsArray']);
+                    $categoryName = 'balls_' . $countCommonBallsArray;
+                }
+                $userSelectionResults[$categoryName][$drawId] = $userResultsDrawId;
             }
 
-            elseif (!empty($data->ballsSelectionEuromillions) && empty($data->starsSelection)) {
-                $tutu = 'toto: Ok et titi: vide';
-
-                return $this->render(
-                    'pages/grid_euromillions/user_euromillions_results.html.twig', [
-                        'tutu' => $tutu,
-                    ]
-                );
-            }
-
-            elseif (empty($data->ballsSelectionEuromillions) && !empty($data->starsSelection)) {
-                $tutu = 'toto: vide et titi: ok';
-
-                return $this->render(
-                    'pages/grid_euromillions/user_euromillions_results.html.twig', [
-                        'tutu' => $tutu,
-                    ]
-                );
-            }*/
+            krsort($userSelectionResults);
 
             return $this->render(
                 'pages/grid_euromillions/user_euromillions_results.html.twig', [
-                'data' => $data,
-                'userSelectionRequest' => $userSelectionRequest
+                    'userSelection' => $userSelection,
+                    'userSelectionResults' => $userSelectionResults,
                 ]
             );
         }
 
         return $this->render('pages/grid_euromillions/index.html.twig', [
-            'form' => $form,
-            'selectionEuromillions' => $selectionEuromillions,
+                'form' => $form,
+                'selectionEuromillions' => $selectionEuromillions,
             ]
         );
     }

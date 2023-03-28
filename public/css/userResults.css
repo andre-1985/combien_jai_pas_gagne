@@ -29,7 +29,6 @@
     text-transform: capitalize;
     text-align: center;
     margin: 1em;
-    border: solid black .1em;
     border-collapse: collapse;
     border-radius: 1em;
     font-weight: bolder;
@@ -45,10 +44,6 @@
 .userResultTable th, td {
     max-width: min-content;
     padding: .5em;
-}
-
-.userResultTable td {
-    border: solid black .1em;
 }
 
 .userResultTable thead th:first-child {

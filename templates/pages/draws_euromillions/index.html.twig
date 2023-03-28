@@ -3,7 +3,7 @@
 {% block title %}CJPG? - Tirages Euromillions{% endblock %}
 
 {% block body %}
-    <div>
+    <main>
         <table>
             <tr>
                 {# sorting of properties based on query components #}
@@ -24,7 +24,7 @@
 
             {# table body #}
             {% for article in allDrawsEuromillions %}
-                <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <tr>
                     <td>{{ article.id }}</td>
                     <td>{{ article.drawDay }}</td>
                     <td>{{ article.drawDate | date('d/m/Y') }}</td>
@@ -39,5 +39,5 @@
         <div class="navigation">
             {{ knp_pagination_render(allDrawsEuromillions) }}
         </div>
-    </div>
+    </main>
 {% endblock %}

@@ -3,8 +3,86 @@
 {% block title %}Résultats de votre grille Euromillions - CJPG?{% endblock %}
 
 {% block body %}
-    {{ dump(data) }}
-    {{ dump(userSelectionRequest) }}
-{#    {{ dump(toto) }}#}
-{#    {{ dump(titi) }}#}
+    <main style="display: flex; flex-wrap: wrap; justify-content: center">
+        <div>
+            <h1>Votre selection : {{ userSelection.ballsSelectionEuromillions | join('-') }} + {{ userSelection.starsSelection | join('-') }}</h1>
+        </div>
+        <div>{{ dump(userSelectionResults) }}</div>
+        <table class="userResultTable" id="userResultTable-euromillions">
+            <thead>
+                <tr>
+                    <th>Tirage n°</th>
+                    <th>Jour</th>
+                    <th>Date</th>
+                    <th>Boule N°1</th>
+                    <th>Boule N°2</th>
+                    <th>Boule N°3</th>
+                    <th>Boule N°4</th>
+                    <th>Boule N°5</th>
+                    <th>Etoile N°1</th>
+                    <th>Etoile N°2</th>
+                    <th>Boules gagnantes</th>
+                    <th>Etoiles gagnantes</th>
+                    <th>Gagnants au rang 1 en France</th>
+                    <th>Gagnants au rang 1 en Europe</th>
+                    <th>Montant de la cagnotte (si remporter)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, groupResult in userSelectionResults %}
+                    {% set countTheadResult = groupResult|length %}
+                    {% set divBall %}
+                        <div class="table_icon-ball-euromillions"></div>
+                    {% endset %}
+                    {% set divStar %}
+                        <div class="table_icon-star"></div>
+                    {% endset %}
+                    <tr class="euromillions-resultTitleRow">
+                        {% if key|length == 9 %}
+                            {% set countBalls = key|slice(6, 1) %}
+                            {% set countStars = key|slice(8, 1) %}
+                            <th colspan="15">
+                                <div>
+                                    <p>{{ countTheadResult }} tirages avec {{ countBalls }} {{ divBall }} + {{ countStars }} {{ divStar }}</p>
+                                </div>
+                            </th>
+                        {% elseif key|length == 7 %}
+                            {% set countBalls = key|slice(6, 1) %}
+                            <th colspan="15">
+                                <div>
+                                    <p>{{ countTheadResult }} tirages avec {{ countBalls }} {{ divBall }}</p>
+                                </div>
+                            </th>
+                        {% else %}
+                            {% set countStars = key|slice(7, 1) %}
+                            <th colspan="15">
+                                <div>
+                                    <p>{{ countTheadResult }} tirages avec {{ countStars }} {{ divStar }}</p>
+                                </div>
+                            </th>
+                        {% endif %}
+                    </tr>
+                    {% for result in groupResult %}
+                        <tr>
+                            <td>{{ result.completeDraw.id }}</td>
+                            <td>{{ result.completeDraw.drawDay }}</td>
+                            <td>{{ result.completeDraw.drawDate }}</td>
+                            <td>{{ result.completeDraw.ball1 }}</td>
+                            <td>{{ result.completeDraw.ball2 }}</td>
+                            <td>{{ result.completeDraw.ball3 }}</td>
+                            <td>{{ result.completeDraw.ball4 }}</td>
+                            <td>{{ result.completeDraw.ball5 }}</td>
+                            <td>{{ result.completeDraw.star1 }}</td>
+                            <td>{{ result.completeDraw.star2 }}</td>
+                            <td>{{ result.completeDraw.ascendingWinningBalls | trim('-') }}</td>
+                            <td>{{ result.completeDraw.ascendingWinningStars | trim('-') }}</td>
+                            <td>{{ result.completeDraw.numberOfWinnerInRank1InFrance }}</td>
+                            <td>{{ result.completeDraw.numberOfWinnerInRank1InEurope }}</td>
+                            <td>{{ result.completeDraw.rankReport1 }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
 {% endblock %}

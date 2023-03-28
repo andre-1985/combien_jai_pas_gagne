@@ -4,10 +4,21 @@
 
 {% block body %}
     <main style="display: flex; flex-wrap: wrap; justify-content: center">
-        <div>
-            <h1>Votre selection : {{ userSelection.ballsSelectionEuromillions | join('-') }} + {{ userSelection.starsSelection | join('-') }}</h1>
+        <div class="user_selection" id="user_selection-euromillionsCard">
+            <h2>votre sélection euromillions</h2>
+            <div class="user_selection-numbers" id="user_selection-euromillions">
+                {% if userSelection.ballsSelectionEuromillions is defined %}
+                    {% for ballSelection in userSelection.ballsSelectionEuromillions %}
+                        <div class="wins_balls-euromillions"><p>{{ ballSelection }}</p></div>
+                    {% endfor %}
+                {% endif %}
+                {% if userSelection.starsSelection is defined %}
+                    {% for starSelection in userSelection.starsSelection %}
+                        <div class="table-win_stars"><p>{{ starSelection }}</p></div>
+                    {% endfor %}
+                {% endif %}
+            </div>
         </div>
-        <div>{{ dump(userSelectionResults) }}</div>
         <table class="userResultTable" id="userResultTable-euromillions">
             <thead>
                 <tr>

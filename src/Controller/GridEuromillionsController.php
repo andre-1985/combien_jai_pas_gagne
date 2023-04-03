@@ -5,12 +5,15 @@ namespace App\Controller;
 use App\Entity\SelectionEuromillions;
 use App\Form\GridEuromillionsType;
 use App\Repository\DrawEuromillionsRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
 
 class GridEuromillionsController extends AbstractController
 {
@@ -24,7 +27,6 @@ class GridEuromillionsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $userSelection = $form->getData();
             $userSelectionRequest = $repository->findDrawsByUserSelection($userSelection->ballsSelectionEuromillions, $userSelection->starsSelection);
-            $userSelectionResults = [];
 
             foreach ($userSelectionRequest as $userSelectionRq) {
                 $userResultsDrawId = 'draw_' . $userSelectionRq->getId();
@@ -67,10 +69,23 @@ class GridEuromillionsController extends AbstractController
 
             krsort($userSelectionResults);
 
+            foreach ($userSelectionResults as $key => $groupResult) {
+                $pagerGroupResult = $paginator->paginate(
+                    $groupResult,
+                    $request->query->getInt('page', 1),
+                    20
+                );
+
+                $pager[$key] = $pagerGroupResult;
+            }
+
+            $pagerUserSelectionResults = $pager;
+
             return $this->render(
                 'pages/grid_euromillions/user_euromillions_results.html.twig', [
                     'userSelection' => $userSelection,
                     'userSelectionResults' => $userSelectionResults,
+                    'pagerUserSelectionResults' => $pagerUserSelectionResults,
                 ]
             );
         }

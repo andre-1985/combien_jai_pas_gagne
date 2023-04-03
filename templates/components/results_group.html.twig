@@ -1,0 +1,182 @@
+<div class="groupResultsCard"{{ attributes }}>
+    <div class="groupResultsInfos">
+        {% set resultsCount = groupResult|length %}
+        {% set olderDay = groupResult|first.completeDraw.drawDay %}
+        {% set olderDate = groupResult|first.completeDraw.drawDate %}
+        {% set recentDay = groupResult|last.completeDraw.drawDay %}
+        {% set recentDate = groupResult|last.completeDraw.drawDate %}
+        {% if key|length == 9 %}
+            {% set countBalls = key|slice(6, 1) %}
+            {% set countStars = key|slice(8, 1) %}
+            <p>{{ resultsCount }} tirages gagnants</p>
+            <p>Pour</p>
+            <div class="groupResultsCounts">
+                <p>{{ countBalls }}</p>
+                <div>
+                    <div class="table_icon-ball-euromillions"></div>
+                </div>
+                <p> + {{ countStars }}</p>
+                <div>
+                    <div class="table_icon-star"></div>
+                </div>
+            </div>
+        {% elseif key|length == 7 %}
+            {% set countBalls = key|slice(6, 1) %}
+            <p>{{ resultsCount }} tirages gagnants</p>
+            <p>Pour</p>
+            <div class="groupResultsCounts">
+                <p>{{ countBalls }}</p>
+                <div>
+                    <div class="table_icon-ball-euromillions"></div>
+                </div>
+            </div>
+        {% else %}
+            {% set countStars = key|slice(7, 1) %}
+            <p>{{ resultsCount }} tirages gagnants</p>
+            <p>Pour</p>
+            <div class="groupResultsCounts">
+                <p>{{ countStars }}</p>
+                <div>
+                    <div class="table_icon-star"></div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <div class="groupResultsOlder">
+        <p>Tirage le plus ancien</p>
+        <div class="groupResultsDates">
+            <p>{{ olderDay }}</p>
+            <p>{{ olderDate|date('d/m/Y') }}</p>
+        </div>
+    </div>
+    <div class="groupResultsRecent">
+        <p>Tirage le plus récent</p>
+        <div class="groupResultsDates">
+            <p>{{ recentDay }}</p>
+            <p>{{ recentDate|date('d/m/Y') }}</p>
+        </div>
+    </div>
+    {{ component('results_group_stats', {
+        userSelection: userSelection,
+        groupResult: groupResult,
+    }) }}
+    {#<div class="groupResultsStats">
+        <div class="groupResultsExpenses"></div>
+        <div class="groupResultsWinnings"></div>
+    </div>#}
+</div>
+
+{#
+<table class="userResultTable">
+    <thead>
+        <tr>
+            <th>Tirage<br>n°</th>
+            <th>Jour</th>
+            <th>Date</th>
+            <th>Boule<br>N°1</th>
+            <th>Boule<br>N°2</th>
+            <th>Boule<br>N°3</th>
+            <th>Boule<br>N°4</th>
+            <th>Boule<br>N°5</th>
+            <th>Etoile<br>N°1</th>
+            <th>Etoile<br>N°2</th>
+            <th>Boules<br>gagnantes</th>
+            <th>Etoiles<br>gagnantes</th>
+            <th>Gagnants<br>au rang 1<br>en France</th>
+            <th>Gagnants<br>au rang 1<br>en Europe</th>
+            <th>Montant<br>de la cagnotte<br>(si remporter)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for result in this.resultsGroup %}
+            <tr>
+                <td>{{ result.completeDraw.id }}</td>
+                <td>{{ result.completeDraw.drawDay }}</td>
+                <td>{{ result.completeDraw.drawDate|date('d/m/Y') }}</td>
+                <td>
+                    {% set classWinloose = 'table-loose_balls-euromillions' %}
+                    {% if result.userCommonBallsArray is defined %}
+                        {% if result.completeDraw.ball1 in result.userCommonBallsArray %}
+                            {% set classWinloose = 'table-win_balls-euromillions' %}
+                        {% endif %}
+                    {% endif %}
+                    <div class="{{ classWinloose }}">
+                        <p>{{ result.completeDraw.ball1 }}</p>
+                    </div>
+                </td>
+                <td>
+                    {% set classWinloose = 'table-loose_balls-euromillions' %}
+                    {% if result.userCommonBallsArray is defined %}
+                        {% if result.completeDraw.ball2 in result.userCommonBallsArray %}
+                            {% set classWinloose = 'table-win_balls-euromillions' %}
+                        {% endif %}
+                    {% endif %}
+                    <div class="{{ classWinloose }}">
+                        <p>{{ result.completeDraw.ball2 }}</p>
+                    </div>
+                </td>
+                <td>
+                    {% set classWinloose = 'table-loose_balls-euromillions' %}
+                    {% if result.userCommonBallsArray is defined %}
+                        {% if result.completeDraw.ball3 in result.userCommonBallsArray %}
+                            {% set classWinloose = 'table-win_balls-euromillions' %}
+                        {% endif %}
+                    {% endif %}
+                    <div class="{{ classWinloose }}">
+                        <p>{{ result.completeDraw.ball3 }}</p>
+                    </div>
+                </td>
+                <td>
+                    {% set classWinloose = 'table-loose_balls-euromillions' %}
+                    {% if result.userCommonBallsArray is defined %}
+                        {% if result.completeDraw.ball4 in result.userCommonBallsArray %}
+                            {% set classWinloose = 'table-win_balls-euromillions' %}
+                        {% endif %}
+                    {% endif %}
+                    <div class="{{ classWinloose }}">
+                        <p>{{ result.completeDraw.ball4 }}</p>
+                    </div>
+                </td>
+                <td>
+                    {% set classWinloose = 'table-loose_balls-euromillions' %}
+                    {% if result.userCommonBallsArray is defined %}
+                        {% if result.completeDraw.ball5 in result.userCommonBallsArray %}
+                            {% set classWinloose = 'table-win_balls-euromillions' %}
+                        {% endif %}
+                    {% endif %}
+                    <div class="{{ classWinloose }}">
+                        <p>{{ result.completeDraw.ball5 }}</p>
+                    </div>
+                </td>
+                <td>
+                    {% set classWinloose = 'table-loose_stars' %}
+                    {% if result.userCommonStarsArray is defined %}
+                        {% if result.completeDraw.star1 in result.userCommonStarsArray %}
+                            {% set classWinloose = 'table-win_stars' %}
+                        {% endif %}
+                    {% endif %}
+                    <div class="{{ classWinloose }}">
+                        <p>{{ result.completeDraw.star1 }}</p>
+                    </div>
+                </td>
+                <td>
+                    {% set classWinloose = 'table-loose_stars' %}
+                    {% if result.userCommonStarsArray is defined %}
+                        {% if result.completeDraw.star2 in result.userCommonStarsArray %}
+                            {% set classWinloose = 'table-win_stars' %}
+                        {% endif %}
+                    {% endif %}
+                    <div class="{{ classWinloose }}">
+                        <p>{{ result.completeDraw.star2 }}</p>
+                    </div>
+                </td>
+                <td>{{ result.completeDraw.ascendingWinningBalls | trim('-') }}</td>
+                <td>{{ result.completeDraw.ascendingWinningStars | trim('-') }}</td>
+                <td>{{ result.completeDraw.numberOfWinnerInRank1InFrance }}</td>
+                <td>{{ result.completeDraw.numberOfWinnerInRank1InEurope }}</td>
+                <td>{{ result.completeDraw.rankReport1 }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+#}

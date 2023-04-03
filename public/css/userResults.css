@@ -1,4 +1,5 @@
-.user_selection {
+.user_selection,
+.groupResultsCard {
     padding: .5em;
     border-radius: 2em;
     box-shadow: .1em .1em 1em rgba(0, 0, 0, 0.250);
@@ -18,10 +19,59 @@
 }
 
 .user_selection-numbers,
-.user_selection-numbers div {
+.user_selection-numbers div,
+.groupsResults {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.groupsResults {
+    flex-wrap: wrap;
+}
+
+.groupResultsCard {
+    width: max-content;
+    margin: .5em;
+    padding: .5em;
+    display: flex;
+    flex-flow: wrap column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    letter-spacing: .1em;
+}
+
+.groupResultsInfos * {
+    margin: .5em 0;
+}
+
+.groupResultsInfos,
+.groupResultsOlder,
+.groupResultsRecent {
+    margin: .5em 0;
+    width: 100%;
+    text-align: center;
+}
+
+.groupResultsCounts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.groupResultsCounts div {
+    margin: 0 .25em;
+}
+
+.groupResultsOlder div,
+.groupResultsRecent div {
+    flex-flow: nowrap row;
+}
+
+.groupResultsDates {
+    display: flex;
+    justify-content: space-around;
 }
 
 .userResultTable {
@@ -30,6 +80,7 @@
     text-align: center;
     margin: 1em;
     border-radius: 1em;
+    border-collapse: collapse;
     font-weight: bolder;
     letter-spacing: .1em;
 }
@@ -68,10 +119,6 @@
 
 .userResultTable tbody > th {
     background-color: var(--light_rouge_france);
-}
-
-.userResultTable tbody > tr:nth-child(odd) {
-    background-color: blanchedalmond;
 }
 
 .table-win_balls-loto,
@@ -116,7 +163,7 @@
 /* LOTO */
 
 #user_selection-loto {
-    width: 18em;
+    width: max-content;
 }
 
 #userResultTable-loto thead > tr {
@@ -148,7 +195,7 @@
 /* EUROMILLIONS */
 
 #user_selection-euromillions {
-    width: 21em;
+    width: max-content;
 }
 
 #user_selection-euromillions .table-win_stars {

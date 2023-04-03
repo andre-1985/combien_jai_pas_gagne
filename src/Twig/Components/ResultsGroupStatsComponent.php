@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use function Symfony\Component\String\u;
 
 #[AsTwigComponent('results_group_stats')]
 final class ResultsGroupStatsComponent
@@ -20,21 +21,25 @@ final class ResultsGroupStatsComponent
     ) {
     }
 
-    public function getBallsChart(): array
+    public function getBallsChart(): Chart
     {
+        $countPerBalls = array_fill_keys($this->userSelection->ballsSelectionEuromillions, 0);
+        $countPerStars = array_fill_keys($this->userSelection->starsSelection, 0);
+
         foreach ($this->groupResult as $result) {
             if (isset($result['userCommonBallsArray'])) {
-                $countPerBalls = array_fill_keys($this->userSelection->ballsSelectionEuromillions, 0);
-                $userCommonBallsArray = $result['userCommonBallsArray'];
-                foreach ($userCommonBallsArray as $cB) {
-                    $countPerBalls[$cB]++;
+                foreach ($countPerBalls as $key => $cpb) {
+                    if (in_array($key, $result['userCommonBallsArray'])) {
+                        $countPerBalls[$key]+=1;
+                    }
                 }
             }
 
             if (isset($result['userCommonStarsArray'])) {
-                $countPerStars = array_fill_keys($this->userSelection->starsSelection, 0);
-                foreach ($result['userCommonStarsArray'] as $cS) {
-                    $countPerStars[$cS] = ++$countPerStars[$cS];
+                foreach ($countPerStars as $key => $cps) {
+                    if (in_array($key, $result['userCommonStarsArray'])) {
+                        $countPerStars[$key]+=1;
+                    }
                 }
             }
         }
@@ -85,6 +90,6 @@ final class ResultsGroupStatsComponent
             ],
         ]);
 
-        return $countPerBalls;
+        return $ballsChart;
     }
 }

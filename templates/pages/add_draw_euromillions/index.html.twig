@@ -1,0 +1,146 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un tirage euromillions{% endblock %}
+
+{% block body %}
+    {{ form_start(form, { 'attr': { 'id': 'add_draw_euromillions' } }) }}
+        <div class="group-div" id="group-date">
+            {{ form_label(form.drawDay, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.drawDay, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.drawDate, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.drawDate, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+        <div class="group-div" id="group-balls">
+            {{ form_label(form.ball1, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.ball1, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.ball2, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.ball2, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.ball3, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.ball3, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.ball4, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.ball4, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.ball5, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.ball5, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+        <div class="group-div" id="group-stars">
+            {{ form_label(form.star1, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.star1, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.star2, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.star2, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+        <div class="group-div" id="group-ascending">
+            {{ form_label(form.ascendingWinningBalls, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.ascendingWinningBalls, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.ascendingWinningStars, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.ascendingWinningStars, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+        <div class="group-div" id="group-rank1">
+            {{ form_label(form.numberOfWinnerInRank1InFrance, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank1InFrance, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.numberOfWinnerInRank1InEurope, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank1InEurope, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.rankReport1, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.rankReport1, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+        <div class="group-div" id="group-rank2">
+            {{ form_label(form.numberOfWinnerInRank2InFrance, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank2InFrance, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.numberOfWinnerInRank2InEurope, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank2InEurope, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.rankReport2, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.rankReport2, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+        <div class="group-div" id="group-rank3">
+            {{ form_label(form.numberOfWinnerInRank3InFrance, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank3InFrance, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.numberOfWinnerInRank3InEurope, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank3InEurope, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.rankReport3, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.rankReport3, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+        <div class="group-div" id="group-rank4">
+            {{ form_label(form.numberOfWinnerInRank4InFrance, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank4InFrance, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.numberOfWinnerInRank4InEurope, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank4InEurope, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.rankReport4, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.rankReport4, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+        <div class="group-div" id="group-rank5">
+            {{ form_label(form.numberOfWinnerInRank5InFrance, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank5InFrance, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.numberOfWinnerInRank5InEurope, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank5InEurope, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.rankReport5, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.rankReport5, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+        <div class="group-div" id="group-rank6">
+            {{ form_label(form.numberOfWinnerInRank6InFrance, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank6InFrance, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.numberOfWinnerInRank6InEurope, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank6InEurope, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.rankReport6, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.rankReport6, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+        <div class="group-div" id="group-rank7">
+            {{ form_label(form.numberOfWinnerInRank7InFrance, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank7InFrance, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.numberOfWinnerInRank7InEurope, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank7InEurope, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.rankReport7, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.rankReport7, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+        <div class="group-div" id="group-rank8">
+            {{ form_label(form.numberOfWinnerInRank8InFrance, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank8InFrance, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.numberOfWinnerInRank8InEurope, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank8InEurope, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.rankReport8, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.rankReport8, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+        <div class="group-div" id="group-rank9">
+            {{ form_label(form.numberOfWinnerInRank9InFrance, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank9InFrance, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.numberOfWinnerInRank9InEurope, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank9InEurope, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.rankReport9, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.rankReport9, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+        <div class="group-div" id="group-rank10">
+            {{ form_label(form.numberOfWinnerInRank10InFrance, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank10InFrance, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.numberOfWinnerInRank10InEurope, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank10InEurope, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.rankReport10, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.rankReport10, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+        <div class="group-div" id="group-rank11">
+            {{ form_label(form.numberOfWinnerInRank11InFrance, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank11InFrance, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.numberOfWinnerInRank11InEurope, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank11InEurope, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.rankReport11, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.rankReport11, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+        <div class="group-div" id="group-rank12">
+            {{ form_label(form.numberOfWinnerInRank12InFrance, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank12InFrance, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.numberOfWinnerInRank12InEurope, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank12InEurope, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.rankReport12, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.rankReport12, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+        <div class="group-div" id="group-rank13">
+            {{ form_label(form.numberOfWinnerInRank13InFrance, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank13InFrance, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.numberOfWinnerInRank13InEurope, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.numberOfWinnerInRank13InEurope, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+            {{ form_label(form.rankReport13, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.rankReport13, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+        <div class="group-div" id="group-validate">
+            {{ form_label(form.validate, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
+            {{ form_widget(form.validate, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

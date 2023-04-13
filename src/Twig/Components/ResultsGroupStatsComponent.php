@@ -3,12 +3,9 @@
 namespace App\Twig\Components;
 
 use App\Entity\SelectionEuromillions;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
-use function Symfony\Component\String\u;
 
 #[AsTwigComponent('results_group_stats')]
 final class ResultsGroupStatsComponent
@@ -82,12 +79,44 @@ final class ResultsGroupStatsComponent
             'labels' => $labelsSelection,
             'datasets' => [
                 [
-                    'label' => 'Numéro',
+                    'label' => 'Nombre de fois gagnant',
                     'backgroundColor' => $dataColors,
                     'borderColor' => 'rgb(0, 0, 0)',
                     'data' => $dataStats,
                 ],
             ],
+            'plugins' => [
+                'legend' => [
+                    'display' => false,
+                ],
+            ],
+        ]);
+
+        $ballsChart->setOptions([
+            'plugins' => [
+                'legend' => [
+                    'display' => false,
+                ],
+            ],
+            'scales' => [
+                'y' => [
+                    'title' => [
+                        'display' => true,
+                        'text' => 'Nb de fois gagnant'
+                    ],
+                    'min' => 0,
+                    'suggestedMax' => 5,
+                    'ticks' => [
+                        'stepSize' => 1,
+                    ],
+                ],
+                'x' => [
+                    'title' => [
+                        'display' => true,
+                        'text' => 'Boules / Etoiles'
+                    ],
+                ]
+            ]
         ]);
 
         return $ballsChart;

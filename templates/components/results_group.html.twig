@@ -1,5 +1,6 @@
 <div class="groupResultsCard"{{ attributes }}>
     <div class="groupResultsInfos">
+        {#        {{ dump(this.groupResult) }}#}
         {% set resultsCount = groupResult|length %}
         {% set olderDay = groupResult|first.completeDraw.drawDay %}
         {% set olderDate = groupResult|first.completeDraw.drawDate %}
@@ -56,10 +57,12 @@
             <p>{{ recentDate|date('d/m/Y') }}</p>
         </div>
     </div>
-    {{ component('results_group_stats', {
-        userSelection: userSelection,
-        groupResult: groupResult,
-    }) }}
+    <div class="groupResultsNumbersStats">
+        {{ component('results_group_stats', {
+            userSelection: userSelection,
+            groupResult: groupResult,
+        }) }}
+    </div>
     {#<div class="groupResultsStats">
         <div class="groupResultsExpenses"></div>
         <div class="groupResultsWinnings"></div>

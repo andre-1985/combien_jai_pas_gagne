@@ -10,3 +10,15 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
+
+import 'tw-elements';
+
+import {
+    Collapse,
+    Dropdown,
+    Ripple,
+    Tab,
+    initTE,
+} from "tw-elements";
+
+initTE({ Collapse, Dropdown, Ripple, Tab });

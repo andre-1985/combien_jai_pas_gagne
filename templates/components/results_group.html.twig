@@ -1,185 +1,108 @@
-<div class="groupResultsCard"{{ attributes }}>
-    <div class="groupResultsInfos">
-        {#        {{ dump(this.groupResult) }}#}
-        {% set resultsCount = groupResult|length %}
-        {% set olderDay = groupResult|first.completeDraw.drawDay %}
-        {% set olderDate = groupResult|first.completeDraw.drawDate %}
-        {% set recentDay = groupResult|last.completeDraw.drawDay %}
-        {% set recentDate = groupResult|last.completeDraw.drawDate %}
-        {% if key|length == 9 %}
-            {% set countBalls = key|slice(6, 1) %}
-            {% set countStars = key|slice(8, 1) %}
-            <p>{{ resultsCount }} tirages gagnants</p>
-            <p>Pour</p>
-            <div class="groupResultsCounts">
-                <p>{{ countBalls }}</p>
-                <div>
-                    <div class="table_icon-ball-euromillions"></div>
-                </div>
-                <p> + {{ countStars }}</p>
-                <div>
-                    <div class="table_icon-star"></div>
-                </div>
-            </div>
-        {% elseif key|length == 7 %}
-            {% set countBalls = key|slice(6, 1) %}
-            <p>{{ resultsCount }} tirages gagnants</p>
-            <p>Pour</p>
-            <div class="groupResultsCounts">
-                <p>{{ countBalls }}</p>
-                <div>
-                    <div class="table_icon-ball-euromillions"></div>
-                </div>
-            </div>
-        {% else %}
-            {% set countStars = key|slice(7, 1) %}
-            <p>{{ resultsCount }} tirages gagnants</p>
-            <p>Pour</p>
-            <div class="groupResultsCounts">
-                <p>{{ countStars }}</p>
-                <div>
-                    <div class="table_icon-star"></div>
-                </div>
-            </div>
-        {% endif %}
+<div{{ attributes }} class="w-fit m-6 block rounded-lg bg-white text-center shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+    {% set resultsCount = groupResult|length %}
+    {% set olderDay = groupResult|first.completeDraw.drawDay %}
+    {% set olderDate = groupResult|first.completeDraw.drawDate %}
+    {% set recentDay = groupResult|last.completeDraw.drawDay %}
+    {% set recentDate = groupResult|last.completeDraw.drawDate %}
+    {% if key|length == 9 %}
+    {% set countBalls = key|slice(6, 1) %}
+    {% set countStars = key|slice(8, 1) %}
+    <div
+        class="flex justify-center items-center border-b-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50"
+    >
+        {{ resultsCount }} tirages gagnants pour {{ countBalls }}
+        <div class="table_icon-ball-euromillions"></div> + {{ countStars }}
+        <div class="table_icon-star"></div>
     </div>
-    <div class="groupResultsOlder">
-        <p>Tirage le plus ancien</p>
-        <div class="groupResultsDates">
-            <p>{{ olderDay }}</p>
-            <p>{{ olderDate|date('d/m/Y') }}</p>
-        </div>
-    </div>
-    <div class="groupResultsRecent">
-        <p>Tirage le plus récent</p>
-        <div class="groupResultsDates">
-            <p>{{ recentDay }}</p>
-            <p>{{ recentDate|date('d/m/Y') }}</p>
-        </div>
-    </div>
-    <div class="groupResultsNumbersStats">
+    <div class="p-6">
+        <h5
+            class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50"
+        >
+            Stats pour chaque numéros
+        </h5>
         {{ component('results_group_stats', {
             userSelection: userSelection,
             groupResult: groupResult,
         }) }}
     </div>
-    {#<div class="groupResultsStats">
-        <div class="groupResultsExpenses"></div>
-        <div class="groupResultsWinnings"></div>
-    </div>#}
-</div>
+    <div
+        class="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50"
+    >
+        <a
+            href="#"
+            class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+            data-te-ripple-init
+            data-te-ripple-color="light"
+        >
+            Button
+        </a>
+    </div>
+    {% elseif key|length == 7 %}
+    {% set countBalls = key|slice(6, 1) %}
+    <div
+        class="flex justify-center items-center border-b-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50"
+    >
+        {{ resultsCount }} tirages gagnants pour {{ countBalls }}
+        <div>
+            <div class="table_icon-ball-euromillions"></div>
+        </div>
+    </div>
+    <div class="p-6">
+        <h5
+            class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50"
+        >
+            Stats pour chaque numéros
+        </h5>
+        {{ component('results_group_stats', {
+            userSelection: userSelection,
+            groupResult: groupResult,
+        }) }}
+    </div>
+    <div
+        class="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50"
+    >
+        <a
+            href="#"
+            class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+            data-te-ripple-init
+            data-te-ripple-color="light"
+        >
+            Button
+        </a>
+    </div>
+    {% else %}
+    {% set countStars = key|slice(7, 1) %}
+    <div
+        class="flex justify-center items-center border-b-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50"
+    >
+        {{ resultsCount }} tirages gagnants pour {{ countStars }}
+        <div>
+            <div class="table_icon-star"></div>
+        </div>
+    </div>
+    <div class="p-6">
+        <h5
+            class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50"
+        >
+            Stats pour chaque numéros
+        </h5>
+        {{ component('results_group_stats', {
+            userSelection: userSelection,
+            groupResult: groupResult,
 
-{#
-<table class="userResultTable">
-    <thead>
-        <tr>
-            <th>Tirage<br>n°</th>
-            <th>Jour</th>
-            <th>Date</th>
-            <th>Boule<br>N°1</th>
-            <th>Boule<br>N°2</th>
-            <th>Boule<br>N°3</th>
-            <th>Boule<br>N°4</th>
-            <th>Boule<br>N°5</th>
-            <th>Etoile<br>N°1</th>
-            <th>Etoile<br>N°2</th>
-            <th>Boules<br>gagnantes</th>
-            <th>Etoiles<br>gagnantes</th>
-            <th>Gagnants<br>au rang 1<br>en France</th>
-            <th>Gagnants<br>au rang 1<br>en Europe</th>
-            <th>Montant<br>de la cagnotte<br>(si remporter)</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for result in this.resultsGroup %}
-            <tr>
-                <td>{{ result.completeDraw.id }}</td>
-                <td>{{ result.completeDraw.drawDay }}</td>
-                <td>{{ result.completeDraw.drawDate|date('d/m/Y') }}</td>
-                <td>
-                    {% set classWinloose = 'table-loose_balls-euromillions' %}
-                    {% if result.userCommonBallsArray is defined %}
-                        {% if result.completeDraw.ball1 in result.userCommonBallsArray %}
-                            {% set classWinloose = 'table-win_balls-euromillions' %}
-                        {% endif %}
-                    {% endif %}
-                    <div class="{{ classWinloose }}">
-                        <p>{{ result.completeDraw.ball1 }}</p>
-                    </div>
-                </td>
-                <td>
-                    {% set classWinloose = 'table-loose_balls-euromillions' %}
-                    {% if result.userCommonBallsArray is defined %}
-                        {% if result.completeDraw.ball2 in result.userCommonBallsArray %}
-                            {% set classWinloose = 'table-win_balls-euromillions' %}
-                        {% endif %}
-                    {% endif %}
-                    <div class="{{ classWinloose }}">
-                        <p>{{ result.completeDraw.ball2 }}</p>
-                    </div>
-                </td>
-                <td>
-                    {% set classWinloose = 'table-loose_balls-euromillions' %}
-                    {% if result.userCommonBallsArray is defined %}
-                        {% if result.completeDraw.ball3 in result.userCommonBallsArray %}
-                            {% set classWinloose = 'table-win_balls-euromillions' %}
-                        {% endif %}
-                    {% endif %}
-                    <div class="{{ classWinloose }}">
-                        <p>{{ result.completeDraw.ball3 }}</p>
-                    </div>
-                </td>
-                <td>
-                    {% set classWinloose = 'table-loose_balls-euromillions' %}
-                    {% if result.userCommonBallsArray is defined %}
-                        {% if result.completeDraw.ball4 in result.userCommonBallsArray %}
-                            {% set classWinloose = 'table-win_balls-euromillions' %}
-                        {% endif %}
-                    {% endif %}
-                    <div class="{{ classWinloose }}">
-                        <p>{{ result.completeDraw.ball4 }}</p>
-                    </div>
-                </td>
-                <td>
-                    {% set classWinloose = 'table-loose_balls-euromillions' %}
-                    {% if result.userCommonBallsArray is defined %}
-                        {% if result.completeDraw.ball5 in result.userCommonBallsArray %}
-                            {% set classWinloose = 'table-win_balls-euromillions' %}
-                        {% endif %}
-                    {% endif %}
-                    <div class="{{ classWinloose }}">
-                        <p>{{ result.completeDraw.ball5 }}</p>
-                    </div>
-                </td>
-                <td>
-                    {% set classWinloose = 'table-loose_stars' %}
-                    {% if result.userCommonStarsArray is defined %}
-                        {% if result.completeDraw.star1 in result.userCommonStarsArray %}
-                            {% set classWinloose = 'table-win_stars' %}
-                        {% endif %}
-                    {% endif %}
-                    <div class="{{ classWinloose }}">
-                        <p>{{ result.completeDraw.star1 }}</p>
-                    </div>
-                </td>
-                <td>
-                    {% set classWinloose = 'table-loose_stars' %}
-                    {% if result.userCommonStarsArray is defined %}
-                        {% if result.completeDraw.star2 in result.userCommonStarsArray %}
-                            {% set classWinloose = 'table-win_stars' %}
-                        {% endif %}
-                    {% endif %}
-                    <div class="{{ classWinloose }}">
-                        <p>{{ result.completeDraw.star2 }}</p>
-                    </div>
-                </td>
-                <td>{{ result.completeDraw.ascendingWinningBalls | trim('-') }}</td>
-                <td>{{ result.completeDraw.ascendingWinningStars | trim('-') }}</td>
-                <td>{{ result.completeDraw.numberOfWinnerInRank1InFrance }}</td>
-                <td>{{ result.completeDraw.numberOfWinnerInRank1InEurope }}</td>
-                <td>{{ result.completeDraw.rankReport1 }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
-#}
+        }) }}
+    </div>
+    <div
+        class="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50"
+    >
+        <a
+            href="#"
+            class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+            data-te-ripple-init
+            data-te-ripple-color="light"
+        >
+            Button
+        </a>
+    </div>
+    {% endif %}
+</div>

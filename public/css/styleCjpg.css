@@ -24,12 +24,12 @@
 
 #site-title {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     font-family: 'Metropolis-Bold', 'Courier New', Courier, monospace;
     color: var(--or_euromillions);
     text-align: left;
     text-transform: uppercase;
-    padding: 1em;
+    padding: 1rem;
 }
 
 #nav-header {
@@ -39,14 +39,14 @@
 }
 
 #nav-header h1 {
-    border-right: solid .2em var(--rouge_france);
+    border-right: solid .2rem var(--rouge_france);
 }
 
 #nav-header > a {
     text-align: center;
     text-transform: capitalize;
-    margin: 1em;
-    max-width: 10em;
+    margin: 1rem;
+    max-width: 10rem;
     color: white;
 }
 
@@ -72,20 +72,19 @@
 }
 
 #welcome-text {
-    width: 100%;
-    margin: .5em 2em;
-    line-height: 2em;
-    letter-spacing: .1em;
+    margin: .5rem 2rem;
+    line-height: 2rem;
+    letter-spacing: .1rem;
     font-family: 'Metropolis-Bold', 'Courier New', Courier, monospace;
-    font-size: 2em;
+    font-size: 2rem;
     font-weight: bold;
     text-align: center;
-    border-radius: 1em;
-    box-shadow: .1em .1em 1em black;
+    border-radius: 1rem;
+    box-shadow: .1rem .1rem 1rem black;
 }
 
 #welcome-text h2 {
-    margin-bottom: .5em;
+    margin-bottom: .5rem;
 }
 
 .form-error {

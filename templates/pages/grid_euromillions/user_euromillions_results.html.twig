@@ -3,30 +3,18 @@
 {% block title %}Résultats de votre grille Euromillions - CJPG?{% endblock %}
 
 {% block body %}
-    <main class="container-column">
-        <div class="user_selection" id="user_selection-euromillionsCard">
-            <h2>votre sélection euromillions</h2>
-            <div class="user_selection-numbers" id="user_selection-euromillions">
-                {% if userSelection.ballsSelectionEuromillions is defined %}
-                    {% for ballSelection in userSelection.ballsSelectionEuromillions %}
-                        <div class="wins_balls-euromillions"><p>{{ ballSelection }}</p></div>
-                    {% endfor %}
-                {% endif %}
-                {% if userSelection.starsSelection is defined %}
-                    {% for starSelection in userSelection.starsSelection %}
-                        <div class="table-win_stars"><p>{{ starSelection }}</p></div>
-                    {% endfor %}
-                {% endif %}
-            </div>
-        </div>
-        <div class="groupsResults">
-            {% for key, groupResult in userSelectionResults %}
-                {{ component('results_group', {
-                    userSelection: userSelection,
-                    key: key,
-                    groupResult: groupResult,
-                }) }}
-                {#{% for key, groupResult in userSelectionResults %}
+    <main>
+        {{ component('card_user_selection_euromillions', {
+            userSelection: userSelection,
+        }) }}
+        <div class="flex flex-wrap justify-center">
+        {% for key, groupResult in userSelectionResults %}
+            {{ component('results_group', {
+                userSelection: userSelection,
+                key: key,
+                groupResult: groupResult,
+            }) }}
+            {#{% for key, groupResult in userSelectionResults %}
             {% set countTheadResult = groupResult|length %}
             {% set divBall %}
                 <div class="table_icon-ball-euromillions"></div>
@@ -171,7 +159,7 @@
                 {% endfor %}
                 </tbody>
             </table>#}
-            {% endfor %}
+        {% endfor %}
         </div>
     </main>
 {% endblock %}

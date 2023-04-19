@@ -11,6 +11,7 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 final class ResultsGroupComponent extends AbstractController
 {
     use DefaultActionTrait;
+
     public SelectionEuromillions $userSelection;
     public string $key;
     public array $groupResult;

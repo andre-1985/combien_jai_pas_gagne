@@ -1,0 +1,19 @@
+<div{{ attributes }} class="block my-6 mx-auto w-fit rounded-lg bg-white text-center shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+    <div class="p-6">
+        <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+            Votre sélection Loto
+        </h5>
+        <div class="flex justify-center border-t-2 border-neutral-100 pt-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
+            {% if userSelection.ballsSelectionLoto is defined %}
+                {% for ballSelection in userSelection.ballsSelectionLoto %}
+                    <div class="wins_balls-euromillions"><p>{{ ballSelection }}</p></div>
+                {% endfor %}
+            {% endif %}
+            {% if userSelection.luckyNumberSelection is defined %}
+                {% for luckyNumberSelection in userSelection.luckyNumberSelection %}
+                    <div class="table-win_stars"><p>{{ luckyNumberSelection }}</p></div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>

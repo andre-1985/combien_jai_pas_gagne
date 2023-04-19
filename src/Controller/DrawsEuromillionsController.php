@@ -23,7 +23,7 @@ class DrawsEuromillionsController extends AbstractController
         $allDrawsEuromillions = $paginator->paginate(
             $drawsEuromillions,
             $request->query->getInt('page', 1),
-            20
+            40
         );
 
         return $this->render('pages/draws_euromillions/index.html.twig', [

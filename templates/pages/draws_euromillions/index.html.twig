@@ -4,24 +4,17 @@
 
 {% block body %}
     <main>
-        <table>
-            <tr>
-                {# sorting of properties based on query components #}
-                <th>{{ knp_pagination_sortable(allDrawsEuromillions, 'Tirage n°', 'a.id') }}</th>
-                <th{% if allDrawsEuromillions.isSorted('a.drawDay') %} class="sorted"{% endif %}>
-                    {{ knp_pagination_sortable(allDrawsEuromillions, 'Jour', 'a.drawDay') }}
-                </th>
-                <th{% if allDrawsEuromillions.isSorted(['a.drawDate']) %} class="sorted"{% endif %}>
-                    {{ knp_pagination_sortable(allDrawsEuromillions, 'Date de tirage', ['a.drawDate']) }}
-                </th>
-                <th{% if allDrawsEuromillions.isSorted(['a.ascendingWinningBalls']) %} class="sorted"{% endif %}>
-                    {{ knp_pagination_sortable(allDrawsEuromillions, 'Boules dans l\'ordre de tirage', ['a.ascendingWinningBalls']) }}
-                </th>
-                <th{% if allDrawsEuromillions.isSorted(['a.ascendingWinningStars']) %} class="sorted"{% endif %}>
-                    {{ knp_pagination_sortable(allDrawsEuromillions, 'Etoiles dans l\'ordre de tirage', ['a.ascendingWinningStars']) }}
-                </th>
-            </tr>
-            {# table body #}
+        <table class="min-w-full text-center text-sm font-light">
+            <thead>
+                <tr>
+                    <th>{{ knp_pagination_sortable(allDrawsEuromillions, 'Tirage n°', 'a.id') }}</th>
+                    <th>{{ knp_pagination_sortable(allDrawsEuromillions, 'Jour', 'a.drawDay') }}</th>
+                    <th>{{ knp_pagination_sortable(allDrawsEuromillions, 'Date de tirage', ['a.drawDate']) }}</th>
+                    <th>{{ knp_pagination_sortable(allDrawsEuromillions, 'Boules dans l\'ordre de tirage', ['a.ascendingWinningBalls']) }}</th>
+                    <th>{{ knp_pagination_sortable(allDrawsEuromillions, 'Etoiles dans l\'ordre de tirage', ['a.ascendingWinningStars']) }}</th>
+                </tr>
+            </thead>
+            <tbody>
             {% for article in allDrawsEuromillions %}
                 <tr>
                     <td>{{ article.id }}</td>
@@ -31,12 +24,13 @@
                     <td>{{ article.ascendingWinningStars }}</td>
                 </tr>
             {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">{{ knp_pagination_render(allDrawsEuromillions) }}</td>
+                    <td><p> Total: {{ allDrawsEuromillions.getTotalItemCount }} tirages.</p></td>
+                </tr>
+            </tfoot>
         </table>
-        <div class="count">
-            <p> Total: {{ allDrawsEuromillions.getTotalItemCount }} tirages.</p>
-        </div>
-        <div class="navigation">
-            {{ knp_pagination_render(allDrawsEuromillions) }}
-        </div>
     </main>
 {% endblock %}

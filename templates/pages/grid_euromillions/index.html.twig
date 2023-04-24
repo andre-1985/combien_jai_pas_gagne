@@ -3,9 +3,11 @@
 {% block title %}CJPG? - Grille Euromillions{% endblock %}
 
 {% block body %}
-    <div class="container-column">
-        {{ component('grid_euromillions', {
-            form: form,
-        }) }}
-    </div>
+    <main>
+        <div class="container-column">
+            {{ component('grid_euromillions', {
+                form: form,
+            }) }}
+        </div>
+    </main>
 {% endblock %}

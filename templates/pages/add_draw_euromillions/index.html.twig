@@ -3,7 +3,8 @@
 {% block title %}Ajouter un tirage euromillions{% endblock %}
 
 {% block body %}
-    {{ form_start(form, { 'attr': { 'id': 'add_draw_euromillions' } }) }}
+    <main>
+        {{ form_start(form, { 'attr': { 'id': 'add_draw_euromillions' } }) }}
         <div class="group-div" id="group-date">
             {{ form_label(form.drawDay, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
             {{ form_widget(form.drawDay, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
@@ -142,5 +143,6 @@
             {{ form_label(form.validate, null, { 'label_attr': { 'class': 'label_draw_euromillions' } }) }}
             {{ form_widget(form.validate, { 'attr': { 'class': 'form_draw_euromillions' } }) }}
         </div>
-    {{ form_end(form) }}
+        {{ form_end(form) }}
+    </main>
 {% endblock %}

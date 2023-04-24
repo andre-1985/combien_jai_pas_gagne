@@ -239,6 +239,63 @@ class DrawEuromillions
         return [$this->star1, $this->star2];
     }
 
+    public function getDrawArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'drawDay' => $this->drawDay,
+            'drawDate' => $this->drawDate,
+            'ball1' => $this->ball1,
+            'ball2' => $this->ball2,
+            'ball3' => $this->ball3,
+            'ball4' => $this->ball4,
+            'ball5' => $this->ball5,
+            'star1' => $this->star1,
+            'star2' => $this->star2,
+            'ascendingWinningBalls' => $this->ascendingWinningBalls,
+            'ascendingWinningStars' => $this->ascendingWinningStars,
+            'numberOfWinnerInRank1InFrance' => $this->numberOfWinnerInRank1InFrance,
+            'numberOfWinnerInRank1InEurope' => $this->numberOfWinnerInRank1InEurope,
+            'rankReport1' => $this->rankReport1,
+            'numberOfWinnerInRank2InFrance' => $this->numberOfWinnerInRank2InFrance,
+            'numberOfWinnerInRank2InEurope' => $this->numberOfWinnerInRank2InEurope,
+            'rankReport2' => $this->rankReport2,
+            'numberOfWinnerInRank3InFrance' => $this->numberOfWinnerInRank3InFrance,
+            'numberOfWinnerInRank3InEurope' => $this->numberOfWinnerInRank3InEurope,
+            'rankReport3' => $this->rankReport3,
+            'numberOfWinnerInRank4InFrance' => $this->numberOfWinnerInRank4InFrance,
+            'numberOfWinnerInRank4InEurope' => $this->numberOfWinnerInRank4InEurope,
+            'rankReport4' => $this->rankReport4,
+            'numberOfWinnerInRank5InFrance' => $this->numberOfWinnerInRank5InFrance,
+            'numberOfWinnerInRank5InEurope' => $this->numberOfWinnerInRank5InEurope,
+            'rankReport5' => $this->rankReport5,
+            'numberOfWinnerInRank6InFrance' => $this->numberOfWinnerInRank6InFrance,
+            'numberOfWinnerInRank6InEurope' => $this->numberOfWinnerInRank6InEurope,
+            'rankReport6' => $this->rankReport6,
+            'numberOfWinnerInRank7InFrance' => $this->numberOfWinnerInRank7InFrance,
+            'numberOfWinnerInRank7InEurope' => $this->numberOfWinnerInRank7InEurope,
+            'rankReport7' => $this->rankReport7,
+            'numberOfWinnerInRank8InFrance' => $this->numberOfWinnerInRank8InFrance,
+            'numberOfWinnerInRank8InEurope' => $this->numberOfWinnerInRank8InEurope,
+            'rankReport8' => $this->rankReport8,
+            'numberOfWinnerInRank9InFrance' => $this->numberOfWinnerInRank9InFrance,
+            'numberOfWinnerInRank9InEurope' => $this->numberOfWinnerInRank9InEurope,
+            'rankReport9' => $this->rankReport9,
+            'numberOfWinnerInRank10InFrance' => $this->numberOfWinnerInRank10InFrance,
+            'numberOfWinnerInRank10InEurope' => $this->numberOfWinnerInRank10InEurope,
+            'rankReport10' => $this->rankReport10,
+            'numberOfWinnerInRank11InFrance' => $this->numberOfWinnerInRank11InFrance,
+            'numberOfWinnerInRank11InEurope' => $this->numberOfWinnerInRank11InEurope,
+            'rankReport11' => $this->rankReport11,
+            'numberOfWinnerInRank12InFrance' => $this->numberOfWinnerInRank12InFrance,
+            'numberOfWinnerInRank12InEurope' => $this->numberOfWinnerInRank12InEurope,
+            'rankReport12' => $this->rankReport12,
+            'numberOfWinnerInRank13InFrance' => $this->numberOfWinnerInRank13InFrance,
+            'numberOfWinnerInRank13InEurope' => $this->numberOfWinnerInRank13InEurope,
+            'rankReport13' => $this->rankReport13,
+        ];
+    }
+
     public function getId(): ?int
     {
         return $this->id;

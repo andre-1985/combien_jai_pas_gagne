@@ -231,3 +231,7 @@
     background-color: unset;
     background-image: url("../medias/white-star.png");
 }
+
+.brightness-0 {
+    filter: brightness(0) invert(1);
+}

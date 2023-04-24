@@ -1,30 +1,37 @@
+{#
 {% extends 'base.html.twig' %}
 
 {% block title %}Résultats de votre grille Euromillions - CJPG?{% endblock %}
+#}
 
 {% block body %}
-    <table class="userResultTable">
+    <main>
+        {#    {{ dump(app.session.get('groupResult')) }}#}
+        {% for result in app.session.get('groupResult') %}
+            {{ dump(result) }}
+        {% endfor %}
+        {#<table class="userResultTable">
         <thead>
-        <tr>
-            <th>Tirage<br>n°</th>
-            <th>Jour</th>
-            <th>Date</th>
-            <th>Boule<br>N°1</th>
-            <th>Boule<br>N°2</th>
-            <th>Boule<br>N°3</th>
-            <th>Boule<br>N°4</th>
-            <th>Boule<br>N°5</th>
-            <th>Etoile<br>N°1</th>
-            <th>Etoile<br>N°2</th>
-            <th>Boules<br>gagnantes</th>
-            <th>Etoiles<br>gagnantes</th>
-            <th>Gagnants<br>au rang 1<br>en France</th>
-            <th>Gagnants<br>au rang 1<br>en Europe</th>
-            <th>Montant<br>de la cagnotte<br>(si remporter)</th>
-        </tr>
+            <tr>
+                <th>Tirage<br>n°</th>
+                <th>Jour</th>
+                <th>Date</th>
+                <th>Boule<br>N°1</th>
+                <th>Boule<br>N°2</th>
+                <th>Boule<br>N°3</th>
+                <th>Boule<br>N°4</th>
+                <th>Boule<br>N°5</th>
+                <th>Etoile<br>N°1</th>
+                <th>Etoile<br>N°2</th>
+                <th>Boules<br>gagnantes</th>
+                <th>Etoiles<br>gagnantes</th>
+                <th>Gagnants<br>au rang 1<br>en France</th>
+                <th>Gagnants<br>au rang 1<br>en Europe</th>
+                <th>Montant<br>de la cagnotte<br>(si remporter)</th>
+            </tr>
         </thead>
         <tbody>
-        {% for result in resultsGroup %}
+        {% for result in app.session.get('resultsGroup') %}
             <tr>
                 <td>{{ result.completeDraw.id }}</td>
                 <td>{{ result.completeDraw.drawDay }}</td>
@@ -114,5 +121,6 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+    </table>#}
+    </main>
 {% endblock %}

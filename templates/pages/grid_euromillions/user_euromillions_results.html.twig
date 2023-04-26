@@ -7,7 +7,6 @@
         {{ component('card_user_selection_euromillions', {
             userSelection: userSelection,
         }) }}
-{#        {{ dump(userSelectionResults) }}#}
         {% set groupLi = [] %}
         {% set groupDiv = [] %}
         {% for key, groupResult in userSelectionResults %}
@@ -21,75 +20,173 @@
             {% if key|length == 9 %}
                 {% set countBalls = key|slice(6, 1) %}
                 {% set countStars = key|slice(8, 1) %}
-                {% set thResults %}
-                    <th colspan="15">
-                        <div>
-                            <p>{{ countTheadResult }} tirages avec {{ countBalls }} {{ divBall }} + {{ countStars }} {{ divStar }}</p>
-                        </div>
-                    </th>
-                {% endset %}
                 {% set liP %}
                     <div class="flex flex-nowrap justify-center">{{ countBalls }} {{ divBall }} <p>+</p> {{ countStars }} {{ divStar }}</div>
                     <div>{{ countTheadResult }} tirages</div>
                 {% endset %}
             {% elseif key|length == 7 %}
                 {% set countBalls = key|slice(6, 1) %}
-                {% set thResults %}
-                    <th colspan="15">
-                        <div>
-                            <p>{{ countTheadResult }} tirages avec {{ countBalls }} {{ divBall }}</p>
-                        </div>
-                    </th>
-                {% endset %}
                 {% set liP %}
                     <div class="flex flex-nowrap justify-center">{{ countBalls }} {{ divBall }}</div>
                     <div>{{ countTheadResult }} tirages</div>
                 {% endset %}
             {% else %}
                 {% set countStars = key|slice(7, 1) %}
-                {% set thResults %}
-                    <th colspan="15">
-                        <div>
-                            <p>{{ countTheadResult }} tirages avec {{ countStars }} {{ divStar }}</p>
-                        </div>
-                    </th>
-                {% endset %}
                 {% set liP %}
                     <div class="flex flex-nowrap justify-center">{{ countStars }} {{ divStar }}</div>
                     <div>{{ countTheadResult }} tirages</div>
                 {% endset %}
             {% endif %}
-            {% set tableResults %}
-                <table class="userResultTable">
-                    <thead>
-                    <tr class="euromillions-resultTitleRow">
-                        {{ thResults }}
-                    </tr>
-                    <tr>
-                        <th>Tirage<br>n°</th>
-                        <th>Jour</th>
-                        <th>Date</th>
-                        <th>Boule<br>N°1</th>
-                        <th>Boule<br>N°2</th>
-                        <th>Boule<br>N°3</th>
-                        <th>Boule<br>N°4</th>
-                        <th>Boule<br>N°5</th>
-                        <th>Etoile<br>N°1</th>
-                        <th>Etoile<br>N°2</th>
-                        <th>Boules<br>gagnantes</th>
-                        <th>Etoiles<br>gagnantes</th>
-                        <th>Gagnants<br>au rang 1<br>en France</th>
-                        <th>Gagnants<br>au rang 1<br>en Europe</th>
-                        <th>Montant<br>de la cagnotte<br>(si remporter)</th>
-                    </tr>
+            {% if countTheadResult > 20 %}
+                {% set tableResults %}
+                    <table class="min-w-full border text-center text-sm font-light dark:border-neutral-500">
+                        <thead class="border-b font-medium dark:border-neutral-500">
+                            <tr>
+                                <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">{{ knp_pagination_sortable(userSelectionResultsPagination[key], '', 'a.id') }}Tirage<br>n°</th>
+                                <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">{{ knp_pagination_sortable(userSelectionResultsPagination[key], '', 'a.drawDay') }}Jour</th>
+                                <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">{{ knp_pagination_sortable(userSelectionResultsPagination[key], '', 'a.drawDate') }}Date</th>
+                                <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">{{ knp_pagination_sortable(userSelectionResultsPagination[key], '', 'a.ball1') }}Boule<br>N°1</th>
+                                <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">{{ knp_pagination_sortable(userSelectionResultsPagination[key], '', 'a.ball2') }}Boule<br>N°2</th>
+                                <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">{{ knp_pagination_sortable(userSelectionResultsPagination[key], '', 'a.ball3') }}Boule<br>N°3</th>
+                                <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">{{ knp_pagination_sortable(userSelectionResultsPagination[key], '', 'a.ball4') }}Boule<br>N°4</th>
+                                <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">{{ knp_pagination_sortable(userSelectionResultsPagination[key], '', 'a.ball5') }}Boule<br>N°5</th>
+                                <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">{{ knp_pagination_sortable(userSelectionResultsPagination[key], '', 'a.star1') }}Etoile<br>N°1</th>
+                                <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">{{ knp_pagination_sortable(userSelectionResultsPagination[key], '', 'a.star2') }}Etoile<br>N°2</th>
+                                <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">{{ knp_pagination_sortable(userSelectionResultsPagination[key], '', 'a.ascendingWinningBalls') }}Boules<br>gagnantes</th>
+                                <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">{{ knp_pagination_sortable(userSelectionResultsPagination[key], '', 'a.ascendingWinningStars') }}Etoiles<br>gagnantes</th>
+                                <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">{{ knp_pagination_sortable(userSelectionResultsPagination[key], '', 'a.numberOfWinnerInRank1InFrance') }}Gagnants<br>au rang 1<br>en France</th>
+                                <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">{{ knp_pagination_sortable(userSelectionResultsPagination[key], '', 'a.numberOfWinnerInRank1InEurope') }}Gagnants<br>au rang 1<br>en Europe</th>
+                                <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">{{ knp_pagination_sortable(userSelectionResultsPagination[key], '', 'a.rankReport1') }}Montant<br>de la cagnotte<br>(si remporter)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for result in userSelectionResultsPagination[key] %}
+                            <tr class="border-b dark:border-neutral-500">
+                                <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">{{ result.completeDraw.id }}</td>
+                                <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">{{ result.completeDraw.drawDay }}</td>
+                                <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">{{ result.completeDraw.drawDate|date('d/m/Y') }}</td>
+                                <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
+                                    {% set classWinloose = 'table-loose_balls-euromillions' %}
+                                    {% if result.userCommonBallsArray is defined %}
+                                        {% if result.completeDraw.ball1 in result.userCommonBallsArray %}
+                                            {% set classWinloose = 'table-win_balls-euromillions' %}
+                                        {% endif %}
+                                    {% endif %}
+                                    <div class="{{ classWinloose }}">
+                                        <p>{{ result.completeDraw.ball1 }}</p>
+                                    </div>
+                                </td>
+                                <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
+                                    {% set classWinloose = 'table-loose_balls-euromillions' %}
+                                    {% if result.userCommonBallsArray is defined %}
+                                        {% if result.completeDraw.ball2 in result.userCommonBallsArray %}
+                                            {% set classWinloose = 'table-win_balls-euromillions' %}
+                                        {% endif %}
+                                    {% endif %}
+                                    <div class="{{ classWinloose }}">
+                                        <p>{{ result.completeDraw.ball2 }}</p>
+                                    </div>
+                                </td>
+                                <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
+                                    {% set classWinloose = 'table-loose_balls-euromillions' %}
+                                    {% if result.userCommonBallsArray is defined %}
+                                        {% if result.completeDraw.ball3 in result.userCommonBallsArray %}
+                                            {% set classWinloose = 'table-win_balls-euromillions' %}
+                                        {% endif %}
+                                    {% endif %}
+                                    <div class="{{ classWinloose }}">
+                                        <p>{{ result.completeDraw.ball3 }}</p>
+                                    </div>
+                                </td>
+                                <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
+                                    {% set classWinloose = 'table-loose_balls-euromillions' %}
+                                    {% if result.userCommonBallsArray is defined %}
+                                        {% if result.completeDraw.ball4 in result.userCommonBallsArray %}
+                                            {% set classWinloose = 'table-win_balls-euromillions' %}
+                                        {% endif %}
+                                    {% endif %}
+                                    <div class="{{ classWinloose }}">
+                                        <p>{{ result.completeDraw.ball4 }}</p>
+                                    </div>
+                                </td>
+                                <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
+                                    {% set classWinloose = 'table-loose_balls-euromillions' %}
+                                    {% if result.userCommonBallsArray is defined %}
+                                        {% if result.completeDraw.ball5 in result.userCommonBallsArray %}
+                                            {% set classWinloose = 'table-win_balls-euromillions' %}
+                                        {% endif %}
+                                    {% endif %}
+                                    <div class="{{ classWinloose }}">
+                                        <p>{{ result.completeDraw.ball5 }}</p>
+                                    </div>
+                                </td>
+                                <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
+                                    {% set classWinloose = 'table-loose_stars' %}
+                                    {% if result.userCommonStarsArray is defined %}
+                                        {% if result.completeDraw.star1 in result.userCommonStarsArray %}
+                                            {% set classWinloose = 'table-win_stars' %}
+                                        {% endif %}
+                                    {% endif %}
+                                    <div class="{{ classWinloose }}">
+                                        <p>{{ result.completeDraw.star1 }}</p>
+                                    </div>
+                                </td>
+                                <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
+                                    {% set classWinloose = 'table-loose_stars' %}
+                                    {% if result.userCommonStarsArray is defined %}
+                                        {% if result.completeDraw.star2 in result.userCommonStarsArray %}
+                                            {% set classWinloose = 'table-win_stars' %}
+                                        {% endif %}
+                                    {% endif %}
+                                    <div class="{{ classWinloose }}">
+                                        <p>{{ result.completeDraw.star2 }}</p>
+                                    </div>
+                                </td>
+                                <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">{{ result.completeDraw.ascendingWinningBalls | trim('-') }}</td>
+                                <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">{{ result.completeDraw.ascendingWinningStars | trim('-') }}</td>
+                                <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">{{ result.completeDraw.numberOfWinnerInRank1InFrance }}</td>
+                                <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">{{ result.completeDraw.numberOfWinnerInRank1InEurope }}</td>
+                                <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">{{ result.completeDraw.rankReport1 }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="14">{{ knp_pagination_render(userSelectionResultsPagination[key]) }}</td>
+                                <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500"><p> Total: {{ countTheadResult }} tirages.</p></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                {% endset %}
+            {% else %}
+                {% set tableResults %}
+                <table class="min-w-full border text-center text-sm font-light dark:border-neutral-500">
+                    <thead class="border-b font-medium dark:border-neutral-500">
+                        <tr>
+                            <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Tirage<br>n°</th>
+                            <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Jour</th>
+                            <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Date</th>
+                            <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Boule<br>N°1</th>
+                            <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Boule<br>N°2</th>
+                            <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Boule<br>N°3</th>
+                            <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Boule<br>N°4</th>
+                            <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Boule<br>N°5</th>
+                            <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Etoile<br>N°1</th>
+                            <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Etoile<br>N°2</th>
+                            <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Boules<br>gagnantes</th>
+                            <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Etoiles<br>gagnantes</th>
+                            <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Gagnants<br>au rang 1<br>en France</th>
+                            <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Gagnants<br>au rang 1<br>en Europe</th>
+                            <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Montant<br>de la cagnotte<br>(si remporter)</th>
+                        </tr>
                     </thead>
                     <tbody>
                     {% for result in groupResult %}
-                        <tr>
-                            <td>{{ result.completeDraw.id }}</td>
-                            <td>{{ result.completeDraw.drawDay }}</td>
-                            <td>{{ result.completeDraw.drawDate|date('d/m/Y') }}</td>
-                            <td>
+                        <tr class="border-b dark:border-neutral-500">
+                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">{{ result.completeDraw.id }}</td>
+                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">{{ result.completeDraw.drawDay }}</td>
+                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">{{ result.completeDraw.drawDate|date('d/m/Y') }}</td>
+                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
                                 {% set classWinloose = 'table-loose_balls-euromillions' %}
                                 {% if result.userCommonBallsArray is defined %}
                                     {% if result.completeDraw.ball1 in result.userCommonBallsArray %}
@@ -100,7 +197,7 @@
                                     <p>{{ result.completeDraw.ball1 }}</p>
                                 </div>
                             </td>
-                            <td>
+                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
                                 {% set classWinloose = 'table-loose_balls-euromillions' %}
                                 {% if result.userCommonBallsArray is defined %}
                                     {% if result.completeDraw.ball2 in result.userCommonBallsArray %}
@@ -111,7 +208,7 @@
                                     <p>{{ result.completeDraw.ball2 }}</p>
                                 </div>
                             </td>
-                            <td>
+                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
                                 {% set classWinloose = 'table-loose_balls-euromillions' %}
                                 {% if result.userCommonBallsArray is defined %}
                                     {% if result.completeDraw.ball3 in result.userCommonBallsArray %}
@@ -122,7 +219,7 @@
                                     <p>{{ result.completeDraw.ball3 }}</p>
                                 </div>
                             </td>
-                            <td>
+                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
                                 {% set classWinloose = 'table-loose_balls-euromillions' %}
                                 {% if result.userCommonBallsArray is defined %}
                                     {% if result.completeDraw.ball4 in result.userCommonBallsArray %}
@@ -133,7 +230,7 @@
                                     <p>{{ result.completeDraw.ball4 }}</p>
                                 </div>
                             </td>
-                            <td>
+                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
                                 {% set classWinloose = 'table-loose_balls-euromillions' %}
                                 {% if result.userCommonBallsArray is defined %}
                                     {% if result.completeDraw.ball5 in result.userCommonBallsArray %}
@@ -144,7 +241,7 @@
                                     <p>{{ result.completeDraw.ball5 }}</p>
                                 </div>
                             </td>
-                            <td>
+                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
                                 {% set classWinloose = 'table-loose_stars' %}
                                 {% if result.userCommonStarsArray is defined %}
                                     {% if result.completeDraw.star1 in result.userCommonStarsArray %}
@@ -155,7 +252,7 @@
                                     <p>{{ result.completeDraw.star1 }}</p>
                                 </div>
                             </td>
-                            <td>
+                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
                                 {% set classWinloose = 'table-loose_stars' %}
                                 {% if result.userCommonStarsArray is defined %}
                                     {% if result.completeDraw.star2 in result.userCommonStarsArray %}
@@ -166,33 +263,37 @@
                                     <p>{{ result.completeDraw.star2 }}</p>
                                 </div>
                             </td>
-                            <td>{{ result.completeDraw.ascendingWinningBalls | trim('-') }}</td>
-                            <td>{{ result.completeDraw.ascendingWinningStars | trim('-') }}</td>
-                            <td>{{ result.completeDraw.numberOfWinnerInRank1InFrance }}</td>
-                            <td>{{ result.completeDraw.numberOfWinnerInRank1InEurope }}</td>
-                            <td>{{ result.completeDraw.rankReport1 }}</td>
+                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">{{ result.completeDraw.ascendingWinningBalls | trim('-') }}</td>
+                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">{{ result.completeDraw.ascendingWinningStars | trim('-') }}</td>
+                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">{{ result.completeDraw.numberOfWinnerInRank1InFrance }}</td>
+                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">{{ result.completeDraw.numberOfWinnerInRank1InEurope }}</td>
+                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">{{ result.completeDraw.rankReport1 }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500"><p> Total: {{ countTheadResult }} tirages.</p></td>
+                        </tr>
+                    </tfoot>
                 </table>
             {% endset %}
+            {% endif %}
             {% if countBalls is defined and countStars is defined %}
-                {% set countBalls = key|slice(6, 1) %}
-                {% set countStars = key|slice(8, 1) %}
                 {% set href %}
-                    href="#tabs-for{{ countBalls }}b{{ countStars }}s02"
+                    href="#tabs-for{{ key }}02"
                 {% endset %}
                 {% set dTarget %}
-                    data-te-target="#tabs-for{{ countBalls }}b{{ countStars }}s02"
+                    data-te-target="#tabs-for{{ key }}02"
                 {% endset %}
                 {% set aControls %}
-                    aria-controls="tabs-for{{ countBalls }}b{{ countStars }}s02"
+                    aria-controls="tabs-for{{ key }}02"
                 {% endset %}
                 {% set divId %}
-                    id="tabs-for{{ countBalls }}b{{ countStars }}s02"
+                    id="tabs-for{{ key }}02"
                 {% endset %}
                 {% set ariaLabel %}
-                    aria-labelledby="tabs-for{{ countBalls }}b{{ countStars }}s-tab02"
+                    aria-labelledby="tabs-for{{ key }}-tab02"
                 {% endset %}
                 {% if groupLi is empty %}
                     {% set linkRef %}
@@ -244,21 +345,20 @@
                     </div>
                 {% endset %}
             {% elseif countBalls is defined and countStars is not defined %}
-                {% set countBalls = key|slice(6, 1) %}
                 {% set href %}
-                    href="#tabs-for{{ countBalls }}b02"
+                    href="#tabs-for{{ key }}02"
                 {% endset %}
                 {% set dTarget %}
-                    data-te-target="#tabs-for{{ countBalls }}b02"
+                    data-te-target="#tabs-for{{ key }}02"
                 {% endset %}
                 {% set aControls %}
-                    aria-controls="tabs-for{{ countBalls }}b02"
+                    aria-controls="tabs-for{{ key }}02"
                 {% endset %}
                 {% set divId %}
-                    id="tabs-for{{ countBalls }}b02"
+                    id="tabs-for{{ key }}02"
                 {% endset %}
                 {% set ariaLabel %}
-                    aria-labelledby="tabs-for{{ countBalls }}b-tab02"
+                    aria-labelledby="tabs-for{{ key }}-tab02"
                 {% endset %}
                 {% if groupLi is empty %}
                     {% set linkRef %}
@@ -310,21 +410,20 @@
                     </div>
                 {% endset %}
             {% elseif countBalls is not defined and countStars is defined %}
-                {% set countStars = key|slice(7, 1) %}
                 {% set href %}
-                    href="#tabs-for{{ countStars }}s02"
+                    href="#tabs-for{{ key }}02"
                 {% endset %}
                 {% set dTarget %}
-                    data-te-target="#tabs-for{{ countStars }}s02"
+                    data-te-target="#tabs-for{{ key }}02"
                 {% endset %}
                 {% set aControls %}
-                    aria-controls="tabs-for{{ countStars }}s02"
+                    aria-controls="tabs-for{{ key }}02"
                 {% endset %}
                 {% set divId %}
-                    id="tabs-for{{ countStars }}s02"
+                    id="tabs-for{{ key }}02"
                 {% endset %}
                 {% set ariaLabel %}
-                    aria-labelledby="tabs-for{{ countStars }}s-tab02"
+                    aria-labelledby="tabs-for{{ key }}-tab02"
                 {% endset %}
                 {% if groupLi is empty %}
                     {% set linkRef %}
@@ -391,7 +490,7 @@
                     {{ li }}
                 {% endfor %}
             </ul>
-            <div class="mb-6">
+            <div class="mb-6 w-max">
                 {% for div in groupDiv %}
                     {{ div }}
                 {% endfor %}

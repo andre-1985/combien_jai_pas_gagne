@@ -15,13 +15,13 @@
                 </tr>
             </thead>
             <tbody>
-            {% for article in allDrawsEuromillions %}
+            {% for draw in allDrawsEuromillions %}
                 <tr>
-                    <td>{{ article.id }}</td>
-                    <td>{{ article.drawDay }}</td>
-                    <td>{{ article.drawDate | date('d/m/Y') }}</td>
-                    <td>{{ article.ascendingWinningBalls }}</td>
-                    <td>{{ article.ascendingWinningStars }}</td>
+                    <td>{{ draw.id }}</td>
+                    <td>{{ draw.drawDay }}</td>
+                    <td>{{ draw.drawDate | date('d/m/Y') }}</td>
+                    <td>{{ draw.ascendingWinningBalls }}</td>
+                    <td>{{ draw.ascendingWinningStars }}</td>
                 </tr>
             {% endfor %}
             </tbody>

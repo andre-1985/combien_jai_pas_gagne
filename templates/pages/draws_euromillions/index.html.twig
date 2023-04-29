@@ -20,8 +20,8 @@
                     <td>{{ draw.id }}</td>
                     <td>{{ draw.drawDay }}</td>
                     <td>{{ draw.drawDate | date('d/m/Y') }}</td>
-                    <td>{{ draw.ascendingWinningBalls }}</td>
-                    <td>{{ draw.ascendingWinningStars }}</td>
+                    <td>{{ draw.ascendingWinningBalls|trim('-') }}</td>
+                    <td>{{ draw.ascendingWinningStars|trim('-') }}</td>
                 </tr>
             {% endfor %}
             </tbody>
